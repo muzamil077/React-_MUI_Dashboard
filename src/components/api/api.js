@@ -1,56 +1,81 @@
-import { Button, Typography } from "@mui/material";
-import { blue } from "@mui/material/colors";
+import {
+  Button,
+  Card,
+  CardActions,
+  CardContent,
+  CardMedia,
+  Typography,
+} from "@mui/material";
 import { Box } from "@mui/system";
+import DetailPage from "../../pages/DatailPage/DetailPage";
 import React, { useEffect, useState } from "react";
 
-const Home = () => {
-  const [user, setUser] =  useState([])
-  console.log(user, "hello users  how are you all")
+const Home = ({ hendelClick, click }) => {
+  const [user, setUser] = useState([]);
+  console.log(user, "hello users  how are you all");
 
   const callAPI = async () => {
     try {
       const res = await fetch(`https://fakestoreapi.com/products`);
-      const saman = await res.json();
-      console.log(saman);
-      setUser(saman)
-      user.push(saman)
+      const products = await res.json();
+      console.log(products);
+      setUser(products);
+      user.push(products);
     } catch (err) {
       console.log(err);
     }
-  }; 
-  useEffect(() => {
-    callAPI()
-  },[])
-  
+  };
+ callAPI()
+
   return (
     <div>
       <Box>
-        <Box>
-          {
-           user.map((item)=>{
-            return( 
-              <>
-              {/* <h2>{item.id}</h2> */}
-              <img width={50} src={item.image}/>
-              <h2 color={blue} font >{item.title}</h2>
-             
-              </>
-            )
-                    
-           })
+        <Box
+          // columnSpacing={10}
+          spacing={4}
+          sx={{
+            display: "flex",
+            justifyContent: "space-around",
+            flexWrap: "wrap",
+            spacing: "2",
+            marginTop: "10px",
+          }}
+        >
+          {click && 
+          
+          <DetailPage hendelClick={hendelClick} />
           }
-        </Box>
-        <Box>
-          <Typography  sx={{ marginLeft: "18px" }} >Our Data is here</Typography>
-        </Box>
-        <Box>
-          <Button
-            sx={{ marginLeft: "18px" }}
-            variant="contained"
-            onClick={callAPI}
-          >
-            Make API Call
-          </Button>
+          {user.splice(0, 10).map((item) => {
+            return (
+              <>
+                <Card onClick={hendelClick}  sx={{ maxWidth: 345, backgroundColor: "gray", cursor:"pointer" }}>
+                  <CardMedia
+                    component="img"
+                    alt="green iguana"
+                    height="140"
+                    backgroundSize="cover"
+                    backgroundRepeat="no-repeat"
+                    backgroundPosition="center"
+                    image={item.image}
+                  />
+                  <CardContent>
+                    <Typography gutterBottom variant="h5" component="div">
+                      {item.title}
+                    </Typography>
+                    <Typography variant="body2" color="text.secondary">
+                      {item.description}
+                    </Typography>
+                  </CardContent>
+                  <CardActions>
+                    <Button size="small">Share</Button>
+                    <Button size="small">
+                      Learn More
+                    </Button>
+                  </CardActions>
+                </Card>
+              </>
+            );
+          })}
         </Box>
       </Box>
     </div>

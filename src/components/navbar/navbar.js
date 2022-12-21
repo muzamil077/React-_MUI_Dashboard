@@ -19,8 +19,8 @@ import { blue } from "@mui/material/colors";
 const Navbar = () => {
   const theme = useTheme();
   return (
-    <Box>
-      <AppBar position="sticky" sx={{backgroundColor:"gray"}}>
+    <Box position="fixed" >
+      <AppBar sx={{backgroundColor:"gray"}}>
         <Toolbar>
           <Grid sx={{ backgroundColor: "gray", alignItems:"center", borderRadius:"5px"}} p={1} top={7} position="fixed">
             <Grid
@@ -44,7 +44,6 @@ const Navbar = () => {
                 color="inherit"
                 aria-label="open drawer"
               >
-                {/* <FiberManualRecordIcon /> */}
               </IconButton>
               <Typography
                 variant="h6"

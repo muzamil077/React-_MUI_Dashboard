@@ -1,7 +1,5 @@
 import React from "react";
 import HomeRoundedIcon from "@mui/icons-material/HomeRounded";
-import DraftsIcon from "@mui/icons-material/Drafts";
-import MoveToInboxIcon from "@mui/icons-material/MoveToInbox";
 import ArticleIcon from "@mui/icons-material/Article";
 import GroupsIcon from "@mui/icons-material/Groups";
 import StorefrontIcon from "@mui/icons-material/Storefront";
@@ -28,8 +26,8 @@ const Sidebar = () => {
         flex: "1",
         display: { xs: "none", sm: "block" },
       }}
-    >
-      <Box sx={{position:"fixed " ,maxHeight: 500, maxWidth: 500 ,  overflow: 'auto'}} >
+    >   
+      <Box sx={{position:"fixed" ,maxHeight: 500, maxWidth: 500 ,  overflow: 'auto'}} >
       <ListItem disablePadding>
         <ListItemButton alignItems="center">
           <ListItemIcon>
