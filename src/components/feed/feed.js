@@ -1,6 +1,8 @@
 import { Box } from "@mui/system";
 import { useReducer, useState } from "react";
 import Button from "@mui/material/Button";
+import Charts from "../chart/chart";
+import DetailPage from "../../pages/DatailPage/DetailPage";
 import {
   Avatar,
   Card,
@@ -35,7 +37,12 @@ function reducer(state, action) {
 }
 const Feed = () => {
   const [state, dispatech] = useReducer(reducer, initialState);
-  const [open, setOpen] = useState(false);        
+  const [open, setOpen] = useState(false);
+  const [click, setClick] = useState(false);
+  const hendelClick = () => {
+    setClick(!click);
+    console.log("hello Detail page how are you");
+  };
   return (
     <Box
       p={2}
@@ -45,6 +52,44 @@ const Feed = () => {
         borderLeft: "var(--Grid-borderWidth) solid",
       }}
     >
+      <Box>
+        <Charts />
+      </Box>
+      <h2>UseReducer</h2>
+      <Typography
+        sx={{
+          backgroundColor: "gray",
+          width: "8%",
+          color: "white",
+          padding: "5px",
+          borderRadius: "5px",
+        }}
+      >
+        Count:{state.count}
+      </Typography>
+      <Divider />
+      <br />
+      <br />
+      <Stack spacing={2} direction="row">
+        <Button
+          variant="contained"
+          onClick={() => dispatech({ type: "increament" })}
+        >
+          increament
+        </Button>
+        <Button
+          variant="contained"
+          onClick={() => dispatech({ type: "decreament" })}
+        >
+          Decreament
+        </Button>
+        <Button
+          variant="contained"
+          onClick={() => dispatech({ type: "resete" })}
+        >
+          Resete
+        </Button>
+      </Stack>
       <Card>
         <CardHeader
           avatar={
@@ -79,65 +124,7 @@ const Feed = () => {
           </Typography>
         </CardContent>
       </Card>
-      <h2>UseReducer</h2>
-      <Typography sx={{backgroundColor:"gray", width:"8%", color:"white" ,padding:"5px" ,  borderRadius:"5px"}}>Count:{state.count}</Typography> 
-      <Divider />
-      <br />
-      <br />
-      <Stack spacing={2} direction="row">
-        <Button
-          variant="contained"
-          onClick={() => dispatech({ type: "increament" })}
-        >
-          increament
-        </Button>
-        <Button
-          variant="contained"
-          onClick={() => dispatech({ type: "decreament" })}
-        >
-          Decreament
-        </Button>
-        <Button
-          variant="contained"
-          onClick={() => dispatech({ type: "resete" })}
-        >
-          Resete
-        </Button>
-      </Stack>
-      <Box p={2} sx={{ backgroundColor: "white", flex: "4" }}>
-        <Card>
-          <CardHeader
-            avatar={
-              <Avatar sx={{ bgcolor: blue[500] }} aria-label="recipe">
-                M
-              </Avatar>
-            }
-            action={
-              <IconButton aria-label="settings">
-                <Box>
-                  <MoreVertIcon />
-                </Box>
-              </IconButton>
-            }
-            title="Muzamil hussain"
-            subheader="September 14, 2016"
-          />
-          <CardMedia
-            component="img"
-            height="194"
-            image="/static/images/cards/paella.jpg"
-            alt="Paella dish"
-          />
-          <CardContent>
-            <Typography variant="body2" color="text.secondary">
-              This impressive paella is a perfect party dish and a fun meal to
-              cook together with your guests. Add 1 cup of frozen peas along
-              with the mussels, if you like.
-            </Typography>
-          </CardContent>
-        </Card>
-      </Box>
-      <Home />
+      <Home hendelClick={hendelClick} click={click} />
     </Box>
   );
 };
